@@ -3,7 +3,7 @@ import numbers
 from numpy.typing import ArrayLike
 from typing import Union, Tuple, Literal
 
-from ..utils._validations import _ensure_ndarray
+from .cy_givens import cy_givens
 
 def givens(
     a: Union[int, float],
@@ -12,8 +12,7 @@ def givens(
 ) -> Union[Tuple[float, float], np.ndarray]:
     """
     Compute Givens matrix or its elements. Givens matrix ``G`` is a ``2 x 2`` matrix
-    such that ``G @ [a, b]^T = [*, 0]^T`` for given [a, b], where ``*`` is 
-    an unknown number.
+    such that ``G @ [a, b]^T = [*, 0]^T`` for given [a, b], where ``*`` is a sqrt(a**2 + b**2).
 
     Paramters
     ---------
@@ -43,18 +42,8 @@ def givens(
             f" got {b} of type {type(b).__name__}."
         )
     
-    if b == 0.0:
-        c = 1.0
-        s = 0.0
-    else:
-        if np.abs(b) > np.abs(a):
-            tau = -a / float(b)
-            s = 1 / np.sqrt(1.0 + tau**2)
-            c = s * tau
-        else:
-            tau = -b / float(a)
-            c = 1 / np.sqrt(1.0 + tau**2)
-            s = c * tau
+    giv = cy_givens(a, b)
+    c, s = giv["c"], giv["s"]
     
     if mode == "tuple":
         return c, s

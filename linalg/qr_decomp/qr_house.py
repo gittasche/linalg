@@ -52,8 +52,7 @@ def qr_house(
         beta, v = house(a[i:, i], i=0)
         if mode in ["full", "economic"]:
             betas[i] = beta
-        p = np.identity(m - i) - beta * np.outer(v, v)
-        a[i:, i:] = np.dot(p, a[i:, i:])
+        a[i:, i:] -= beta * np.dot(np.outer(v, v), a[i:, i:])
         a[i + 1:, i] = v[1:m - i]
 
     # compute Q matrix if needed
@@ -66,8 +65,7 @@ def qr_house(
         for i in range(k-1, -1, -1):
             v[i] = 1.0
             v[i+1:] = a[i+1:, i]
-            p = np.identity(m - i) - betas[i] * np.outer(v[i:], v[i:])
-            q[i:, i:] = np.dot(p, q[i:, i:])
+            q[i:, i:] -= betas[i] * np.dot(np.outer(v[i:], v[i:]), q[i:, i:])
 
     if mode == "full":
         return q, np.triu(a)

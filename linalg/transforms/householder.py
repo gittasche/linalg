@@ -3,6 +3,7 @@ from numpy.typing import ArrayLike
 from typing import Tuple
 
 from ..utils._validations import _ensure_ndarray
+from .cy_householder import cy_house
 
 def house(
     x: ArrayLike,
@@ -37,18 +38,13 @@ def house(
         dtype="float64"
     )
 
-    x_wi = np.delete(x, i)
-    x_i = x[i]
-    sigma = np.dot(x_wi, x_wi)
-    x[i] = 1.0
-    if sigma == 0.0:
-        beta = 0.0
-    else:
-        nu = np.sqrt(x_i**2 + sigma)
-        if x_i <= 0.0:
-            x[i] = x_i - nu
-        else:
-            x[i] = -sigma / (x_i + nu)
-        beta = 2 * x[i]**2 / (sigma + x[i]**2)
-        x /= x[i]
+    if not (0 <= i < x.size):
+        raise ValueError(
+            f"`i` must be in [0, {x.size}),"
+            f" got {i}."
+        )
+
+    # get `beta` and change `x` in-place
+    beta = cy_house(x, i)
+
     return beta, x
