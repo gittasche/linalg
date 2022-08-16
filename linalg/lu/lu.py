@@ -1,6 +1,6 @@
 import numpy as np
 import warnings
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 from typing import Literal, Tuple, Union
 
 from ..utils._validations import _ensure_ndarray
@@ -13,7 +13,7 @@ def lu(
     piv_option: Union[None, Literal["row", "col", "full"]] = "row",
     mode: Literal["full", "economic"] = "full",
     overwrite_a: bool = False
-) -> Tuple[np.ndarray, ...]:
+) -> Tuple[NDArray, ...]:
     """
     Get LU (PLU, LUQ, PLUQ) decomposition of square matrix.
     If no pivoting: A = LU
@@ -136,7 +136,7 @@ def lu_solve(
     piv_option: Union[None, Literal["row", "col", "full"]] = "row",
     overwrite_a: bool = False,
     overwrite_b: bool = False
-) -> np.ndarray:
+) -> NDArray:
     """
     Solve AX=B using LU decomposition
     

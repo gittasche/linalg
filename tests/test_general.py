@@ -5,6 +5,7 @@ from linalg import solve_triangle
 from linalg import det
 from linalg import inv
 from linalg import solve_band, solves_band
+from linalg import qr
 
 def test_general():
     # test solve
@@ -86,6 +87,16 @@ def test_general():
     assert np.allclose(b, a @ x)
     x = solve_triangle(a, b, lower=True, transposed=True)
     assert np.allclose(b, a.T @ x)
+
+    # test qr
+    a = np.array([
+        [1, 2, 3],
+        [1, 5, 6],
+        [1, 8, 9],
+        [1, 11, 12]
+    ])
+    q, r, p = qr(a, mode="full", pivoting=True, decode_p=True)
+    assert np.allclose(a, q @ r @ p)
 
 if __name__ == "__main__":
     test_general()

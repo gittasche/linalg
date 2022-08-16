@@ -1,7 +1,7 @@
 import numpy as np
 import warnings
 from typing import Literal, Union
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 
 from ..utils._validations import _ensure_ndarray
 from ..utils._validations import PivotingWarning
@@ -15,7 +15,7 @@ def solve_elim(
     overwrite_a: bool = False,
     overwrite_b: bool = False,
     return_a: bool = False
-) -> np.ndarray:
+) -> NDArray:
     """
     Solve AX = B using row elimination strategies.
 

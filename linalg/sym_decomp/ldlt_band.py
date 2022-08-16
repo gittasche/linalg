@@ -1,5 +1,5 @@
 import numpy as np
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 from typing import Literal, Tuple
 
 from ..utils._validations import _ensure_ndarray
@@ -11,7 +11,7 @@ def ldlt_band(
     d: int,
     mode: Literal["full", "economic"] = "full",
     overwrite_a: bool = False
-) -> Tuple[np.ndarray, ...]:
+) -> Tuple[NDArray, ...]:
     """
     LDL^T decomposition of symmetric banded matrix A.
     This implementation does not use symmetric pivoting due
@@ -83,7 +83,7 @@ def sym_band_solve(
     b: ArrayLike,
     overwrite_a: bool = False,
     overwrite_b: bool = False
-) -> np.ndarray:
+) -> NDArray:
     """
     Solve AX = B where A is a symmetric banded matrix
     using LDL^T decomposition.

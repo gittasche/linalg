@@ -1,5 +1,5 @@
 import numpy as np
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 
 from .lu.lu import lu
 from .utils._validations import _ensure_ndarray
@@ -8,7 +8,7 @@ from .utils.solve import solve_lower, solve_upper
 def inv(
     a: ArrayLike,
     overwrite_a: bool = False
-) -> np.ndarray:
+) -> NDArray:
     """
     Inverse square matrix A using LU decomposition.
     It solves equation U x A^-1 = L^-1

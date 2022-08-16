@@ -1,5 +1,5 @@
 import numpy as np
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 from typing import Tuple
 
 from ..utils._validations import _ensure_ndarray
@@ -9,7 +9,7 @@ def house(
     x: ArrayLike,
     i: int,
     overwrite_x: bool = False
-) -> Tuple[float, np.ndarray]:
+) -> Tuple[float, NDArray]:
     """
     Get Householder reflection matrix ``P = 1 - beta * v @ v.T``
     such that ``P @ x = ||x||_2 * e_i``.

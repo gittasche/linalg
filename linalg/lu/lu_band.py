@@ -1,6 +1,6 @@
 import numpy as np
 import warnings
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 from typing import Literal, Tuple, Union
 
 from ..utils._validations import _ensure_ndarray
@@ -16,7 +16,7 @@ def lu_band(
     piv_option: Union[None, Literal["row"]] = "row",
     mode: Literal["full", "economic"] = "full",
     overwrite_a: bool = False
-) -> Tuple[np.ndarray, ...]:
+) -> Tuple[NDArray, ...]:
     """
     LU decomposition of square banded matrix A.
     Only partial pivoting implemented, because full
@@ -127,7 +127,7 @@ def lu_band_solve(
     piv_option: Union[None, Literal["row"]] = "row",
     overwrite_a: bool = False,
     overwrite_b: bool = False
-) -> np.ndarray:
+) -> NDArray:
     """
     Solve AX = B, where A is a square nonsingular matrix
     using band LU decomposition A = PLU.

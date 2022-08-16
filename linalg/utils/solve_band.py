@@ -1,5 +1,5 @@
 import numpy as np
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 
 from ._validations import _ensure_ndarray
 
@@ -10,7 +10,7 @@ def solve_lower_band(
     overwrite_b=False,
     transposed: bool = False,
     unit: bool = False
-) -> np.ndarray:
+) -> NDArray:
     """
     Solve AX = B, where A is a lower triangular banded matrix
     with bandwidth `l`.
@@ -92,7 +92,7 @@ def solve_upper_band(
     overwrite_b=False,
     transposed: bool = False,
     unit: bool = False
-) -> np.ndarray:
+) -> NDArray:
     """
     Solve AX = B, where A is an upper triangular banded matrix
     with bandwidth `u`.

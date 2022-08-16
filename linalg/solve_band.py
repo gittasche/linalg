@@ -1,5 +1,5 @@
 import numpy as np
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 
 from .utils._validations import _ensure_ndarray
 from .lu.lu_band import lu_band_solve
@@ -13,7 +13,7 @@ def solve_band(
     b: ArrayLike,
     overwrite_a: bool = False,
     overwrite_b: bool = False
-):
+) -> NDArray:
     """
     Solve AX = B, where A is a banded matrix.
     Use LU decomposition approach
@@ -71,7 +71,7 @@ def solves_band(
     ensure_pos=False,
     overwrite_a: bool = False,
     overwrite_b: bool = False
-):
+) -> NDArray:
     """
     Solve AX = B, where A is a symmetric banded matrix.
     Use band Cholesky if A is a SPD else use LDL^T.

@@ -1,5 +1,5 @@
 import numpy as np
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 
 from .utils.solve import solve_lower, solve_upper
 from .utils._validations import _ensure_ndarray
@@ -11,7 +11,7 @@ def solve_triangle(
     transposed: bool = False,
     unit: bool = False,
     overwrite_b: bool = False
-) -> np.ndarray:
+) -> NDArray:
     """
     Solve AX = B, where A in general is a triangle matrix
 

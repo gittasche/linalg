@@ -1,6 +1,6 @@
 import numpy as np
 import numbers
-from numpy.typing import ArrayLike
+from numpy.typing import NDArray
 from typing import Union, Tuple, Literal
 
 from .cy_givens import cy_givens
@@ -9,7 +9,7 @@ def givens(
     a: Union[int, float],
     b: Union[int, float],
     mode: Literal["tuple", "ndarray"] = "tuple",
-) -> Union[Tuple[float, float], np.ndarray]:
+) -> Union[Tuple[float, float], NDArray]:
     """
     Compute Givens matrix or its elements. Givens matrix ``G`` is a ``2 x 2`` matrix
     such that ``G @ [a, b]^T = [*, 0]^T`` for given [a, b], where ``*`` is a sqrt(a**2 + b**2).

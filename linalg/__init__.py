@@ -5,6 +5,7 @@ from linalg.solve_triangle import solve_triangle
 from linalg.solve_tridiag import solve_tridiag, solve_sympos_tridiag
 from linalg.solve import solve
 from linalg.transforms import house
+from linalg.qr_interface import qr
 
 from linalg import elim
 from linalg import lu
@@ -22,6 +23,7 @@ __all__ = [
     "solve_sympos_tridiag",
     "solve",
     "house",
+    "qr",
     "elim",
     "lu",
     "sym_decomp",

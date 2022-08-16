@@ -1,6 +1,6 @@
 import numpy as np
-from numpy.typing import ArrayLike
-from typing import Literal
+from numpy.typing import ArrayLike, NDArray
+from typing import Literal, Tuple, Union
 
 from ..transforms.givens import givens
 from ..utils._validations import _ensure_ndarray
@@ -9,7 +9,7 @@ def qr_givens(
     a: ArrayLike,
     mode: Literal["full", "economic", "r"] = "full",
     overwrite_a: bool = False
-):
+) -> Union[Tuple[NDArray, ...], NDArray]:
     """
     Get QR decomposition of rectangular matrix A (``A = QR``),
     where Q is an orthogonal and R is an upper triangular.

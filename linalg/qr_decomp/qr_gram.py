@@ -1,5 +1,5 @@
 import numpy as np
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 from typing import Tuple
 
 from ..utils._validations import _ensure_ndarray
@@ -7,7 +7,7 @@ from ..utils._validations import _ensure_ndarray
 def qr_gram(
     a: ArrayLike,
     overwrite_a: bool = False
-) -> Tuple[np.ndarray, np.ndarray]:
+) -> Tuple[NDArray, ...]:
     """
     Get QR decomposition of rectangular matrix A (``A = QR``),
     where Q is an orthonormal and R is an upper triangular.

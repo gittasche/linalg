@@ -1,5 +1,5 @@
 import numpy as np
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 from typing import Literal
 
 from ._validations import _ensure_ndarray
@@ -9,7 +9,7 @@ def solve_diag(
     a: ArrayLike,
     b: ArrayLike,
     overwrite_b=False
-):
+) -> NDArray:
     """
     Solve AX=B, where A is a diagonal matrix
 
@@ -58,7 +58,7 @@ def solve_lower(
     overwrite_b=False,
     transposed: bool = False,
     unit: bool = False
-):
+) -> NDArray:
     """
     Solve AX=B, where A is a lower triangle matrix
 
@@ -128,7 +128,7 @@ def solve_upper(
     overwrite_b=False,
     transposed: bool = False,
     unit: bool = False
-):
+) -> NDArray:
     """
     Solve AX=B, where A is an upper triangle matrix
 
@@ -200,7 +200,7 @@ def solve_triangle(
     type: Literal["upper", "lower"] = "upper",
     transposed: bool = False,
     unit: bool = False
-):
+) -> NDArray:
     """
     Solve AX = B, where A in general is a permuted triangle matrix
 

@@ -1,5 +1,5 @@
 import numpy as np
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 from typing import Literal
 
 from ..utils._validations import _ensure_ndarray
@@ -10,7 +10,7 @@ def cholesky_band(
     d: int,
     mode: Literal["full", "economic"] = "full",
     overwrite_a: bool = False
-) -> np.ndarray:
+) -> NDArray:
     """
     Cholesky decomposition of symmetric positive definite (SPD) banded matrix A.
     A = LL^T, where L is a low triangle matrix.
@@ -79,7 +79,7 @@ def sympos_band_solve(
     b: ArrayLike,
     overwrite_a: bool = False,
     overwrite_b: bool = False
-) -> np.ndarray:
+) -> NDArray:
     """
     Solve AX = B where A is a symmetric positive definite (SPD) banded matrix
     using cholesky LL^T decomposition.

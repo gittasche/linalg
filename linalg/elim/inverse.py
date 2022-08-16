@@ -1,6 +1,6 @@
 import numpy as np
 from typing import Literal
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 
 from .elim import solve_elim
 from ..utils._validations import _ensure_ndarray
@@ -9,7 +9,7 @@ def inverse(
     a: ArrayLike,
     piv_option: Literal["row", "col", "full"] = "row",
     strategy: Literal["gauss", "gaussj"] = "gauss"
-) -> np.ndarray:
+) -> NDArray:
     """
     Get inverse matrix using gauss elimination
 

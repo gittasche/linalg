@@ -1,5 +1,5 @@
 import numpy as np
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 from collections.abc import Sequence
 from typing import Union
 
@@ -10,7 +10,7 @@ def solve_tridiag(
     d: ArrayLike,
     overwrite_diags: bool = False,
     overwrite_d: bool = False
-) -> np.ndarray:
+) -> NDArray:
     """
     Solve AX = D, where A is a tridiagonal matrix (Thomas algorithm).
     This algorithm is not stable in general.
@@ -98,7 +98,7 @@ def solve_sympos_tridiag(
     b: ArrayLike,
     overwrite_diags: bool = False,
     overwrite_b: bool = False
-) -> np.ndarray:
+) -> NDArray:
     """
     Solve AX = B, where A is a SPD tridiagonal matrix.
     This algorithm is well-conditioned due to SPD.

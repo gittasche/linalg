@@ -1,12 +1,12 @@
 import numpy as np
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 from typing import Literal, Tuple
 
 from ._validations import _ensure_ndarray
 
 def decode_permutation(
     p_ids: ArrayLike
-) -> np.ndarray:
+) -> NDArray:
     """
     Decode permutation vector
 
@@ -36,7 +36,7 @@ def decode_permutation(
 
 def encode_permutation(
     p: ArrayLike
-) -> np.ndarray:
+) -> NDArray:
     """
     Encode permutation matrix
 
@@ -65,7 +65,7 @@ def to_triangle(
     a: ArrayLike,
     type: Literal["upper", "lower"] = "upper",
     overwrite_a: bool = False
-) -> Tuple[np.ndarray, ...]:
+) -> Tuple[NDArray, ...]:
     """
     Transform matrix `a` into triangle form.
     This function very unstable (does not work in many cases).
@@ -120,7 +120,7 @@ def to_triangle(
 def extract_band(
     a: ArrayLike,
     diags: ArrayLike
-):
+) -> NDArray:
     """
     Extract band from matrix A
 

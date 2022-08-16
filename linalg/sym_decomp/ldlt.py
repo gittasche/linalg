@@ -1,6 +1,6 @@
 import numpy as np
 import warnings
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 from typing import Literal, Tuple, Union
 
 from ..utils._validations import _ensure_ndarray
@@ -13,7 +13,7 @@ def ldlt(
     piv_option: Union[None, Literal["sym"]] = "sym",
     mode: Literal["full", "economic"] = "full",
     overwrite_a: bool = False
-) -> Tuple[np.ndarray, ...]:
+) -> Tuple[NDArray, ...]:
     """
     LDL^T (PLDL^TP^T) decomposition of a symmetric matrix A.
     Availible only symmetric pivoting to preserve symmetry of A,
@@ -110,7 +110,7 @@ def sym_solve(
     piv_option: Union[None, Literal["sym"]] = "sym",
     overwrite_a: bool = False,
     overwrite_b: bool = False
-) -> np.ndarray:
+) -> NDArray:
     """
     Solve AX = B where A is a symmetric indefinite matrix
     using LDL^T decomposition.

@@ -1,5 +1,5 @@
 import numpy as np
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 from typing import Literal
 
 from .utils._validations import _ensure_ndarray
@@ -13,7 +13,7 @@ def solve(
     assume_a: Literal["gen", "sym", "pos"] = "gen",
     overwrite_a: bool = False,
     overwrite_b: bool = False
-) -> np.ndarray:
+) -> NDArray:
     """
     Interface to solve AX = B, where A is square full-rank
     N x N matrix, B is a N x NRHS matrix.
