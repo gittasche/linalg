@@ -12,6 +12,8 @@ from linalg import lu
 from linalg import sym_decomp
 from linalg import sympos_decomp
 from linalg import qr_decomp
+from linalg import svd_decomp
+from linalg import eig_unsym
 
 __all__ = [
     "det",
@@ -28,5 +30,7 @@ __all__ = [
     "lu",
     "sym_decomp",
     "sympos_decomp",
-    "qr_decomp"
+    "qr_decomp",
+    "svd_decomp",
+    "eig_unsym"
 ]

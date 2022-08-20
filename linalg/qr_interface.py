@@ -12,6 +12,40 @@ def qr(
     decode_p: Optional[bool] = None,
     overwrite_a=False
 ) -> Union[Tuple[NDArray, ...], NDArray]:
+    """
+    Get QR decomposition of matrix A (``A = QR``).
+    Interface for QR decomposition routines.
+
+    Parameters
+    ----------
+    a : ArrayLike of shape (m, n)
+        input matrix A
+    mode : ["full", "economic", "r"] (default: "full")
+        return options (see ``Returns`` section for details)
+    pivoting : bool (default: False)
+        enable column pivoting
+    decode_p: bool or None (default: None)
+        if not ``None``return permutation matrix:
+        - ``True`` in full (n, n) form
+        - ``False`` in encoded (n,) form
+
+    overwrite_a : bool (default: False)
+        allow to overwrite ``a``
+
+    Returns
+    -------
+    q : ndarray
+        Q matrix of shape (m, m) if ``mode == "full"``,
+        of shape (m, k) if ``mode == "economic"``, where k = min(m, n).
+        Not returned if ``mode == "r"``
+    r : ndarray
+        R matrix of shape (m, n) if ``mode == "full"`` or ``mode == "r"``,
+        of shape (k, n) if ``mode == "economic"``, where k = min(m, n)
+    pivs : ndarray
+        permutation matrix of shape (n, n) if ``decode_p == True`` such that A = QRP,
+        encoded permutation matrix of shape (n,) if ``decode_p == False`` such that
+        A[:, pivs] = QR. Not returned if ``pivoting == False``.
+    """
     if mode not in ["full", "economic", "r"]:
         raise ValueError(
             "Availible `mode` only in ['full', 'economic', 'r'],"

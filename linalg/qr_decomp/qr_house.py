@@ -52,7 +52,7 @@ def qr_house(
     m, n = a.shape
     k = np.minimum(m, n)
     if mode in ["full", "economic"]:
-        betas = np.zeros(n)
+        betas = np.zeros(k)
     
     # compute R matrix and Householder vectors
     for i in range(k):
@@ -98,7 +98,7 @@ def qr_house_piv(
         input matrix A
     mode : ["full", "economic", "r"] (default: "full")
         return options (see ``Returns`` section for details)
-    get_p: bool (default: True)
+    decode_p: bool (default: True)
         return permutation matrix:
         - ``True`` in full (n, n) form
         - ``False`` in encoded (n,) form
@@ -116,8 +116,8 @@ def qr_house_piv(
         R matrix of shape (m, n) if ``mode == "full"`` or ``mode == "r"``,
         of shape (k, n) if ``mode == "economic"``, where k = min(m, n)
     pivs : ndarray
-        permutation matrix of shape (n, n) if ``get_p == True`` such that A = QRP,
-        encoded permutation matrix of shape (n,) if ``get_p == False`` such that
+        permutation matrix of shape (n, n) if ``decode_p == True`` such that A = QRP,
+        encoded permutation matrix of shape (n,) if ``decode_p == False`` such that
         A[:, pivs] = QR
     """
     copy_a = not overwrite_a
@@ -141,7 +141,7 @@ def qr_house_piv(
     piv_idx = np.argmax(c)
     pivs = np.arange(n)
     if mode in ["full", "economic"]:
-        betas = np.zeros(n)
+        betas = np.zeros(k)
     for i in range(k):
         if c[piv_idx] == 0.0:
             break
