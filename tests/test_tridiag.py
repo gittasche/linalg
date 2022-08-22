@@ -31,6 +31,3 @@ def test_tridiag():
     b = np.array([1, 2, 2, 3, 3, 3])
     x = solve_sympos_tridiag((d, e), b)
     assert np.allclose(b, a_check @ x)
-
-if __name__ == "__main__":
-    test_tridiag()

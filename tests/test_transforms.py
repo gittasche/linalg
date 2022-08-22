@@ -19,6 +19,3 @@ def test_transforms():
         [s, c]
     ])
     assert np.allclose(0.0, (g @ x[[1, 3]])[1])
-
-if __name__ == "__main__":
-    test_transforms()

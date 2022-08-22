@@ -7,6 +7,8 @@ from linalg import inv
 from linalg import solve_band, solves_band
 from linalg import qr
 
+from precision_cfg import assert_allclose_custom
+
 def test_general():
     # test solve
     a = np.array([
@@ -17,7 +19,7 @@ def test_general():
     ])
     b = np.array([7, 8, -4, 6])
     x = solve(a, b, assume_a="pos")
-    assert np.allclose(b, a @ x)
+    assert_allclose_custom(b, a @ x)
 
     # test det
     a = np.array([
@@ -27,7 +29,7 @@ def test_general():
         [2, 4, 6, 5]
     ])
     d = det(a)
-    assert np.allclose(d, 141.0)
+    assert_allclose_custom(d, 141.0)
 
     # test inv
     a = np.array([
@@ -38,7 +40,7 @@ def test_general():
     ])
     a_inv = inv(a)
     identity = np.identity(a.shape[0])
-    assert np.allclose(identity, a @ a_inv)
+    assert_allclose_custom(identity, a @ a_inv)
 
     # test band
     a = np.array([
@@ -51,7 +53,7 @@ def test_general():
     ])
     b = np.array([0, 1, 2, 2, 3, 3])
     x = solve_band(a, 1, 2, b)
-    assert np.allclose(b, a @ x)
+    assert_allclose_custom(b, a @ x)
 
     a = np.array([
         [4, 2, -1, 0, 0, 0],
@@ -63,9 +65,9 @@ def test_general():
     ])
     b = np.array([1, 2, 2, 3, 3, 3])
     x = solves_band(a, 2, b, ensure_pos=True)
-    assert np.allclose(b, a @ x)
+    assert_allclose_custom(b, a @ x)
     x = solves_band(a, 2, b, ensure_pos=False)
-    assert np.allclose(b, a @ x)
+    assert_allclose_custom(b, a @ x)
     
     a = np.array([
         [1, 1, 2, 2],
@@ -77,16 +79,16 @@ def test_general():
 
     # test upper triangle
     x = solve_triangle(a, b)
-    assert np.allclose(b, a @ x)
+    assert_allclose_custom(b, a @ x)
     x = solve_triangle(a, b, transposed=True)
-    assert np.allclose(b, a.T @ x)
+    assert_allclose_custom(b, a.T @ x)
     
     # test lower triangle
     a = a.T
     x = solve_triangle(a, b, lower=True)
-    assert np.allclose(b, a @ x)
+    assert_allclose_custom(b, a @ x)
     x = solve_triangle(a, b, lower=True, transposed=True)
-    assert np.allclose(b, a.T @ x)
+    assert_allclose_custom(b, a.T @ x)
 
     # test qr
     a = np.array([
@@ -96,7 +98,4 @@ def test_general():
         [1, 11, 12]
     ])
     q, r, p = qr(a, mode="full", pivoting=True, decode_p=True)
-    assert np.allclose(a, q @ r @ p)
-
-if __name__ == "__main__":
-    test_general()
+    assert_allclose_custom(a, q @ r @ p)

@@ -29,8 +29,6 @@ def house_hess(
         a[:, i + 1:] -= beta * np.dot(a[:, i + 1:], np.outer(v, v))
         if mode == "full":
             a[i + 2:, i] = v[1:n - i - 1]
-        elif mode == "hess":
-            a[i + 2:, i] = 0.0
     
     if mode == "full":
         u = np.identity(n)
