@@ -1,5 +1,7 @@
 import numpy as np
-from linalg.svd_decomp import bidiag, svd
+from numpy.testing import assert_allclose
+
+from linalg.svd_decomp import bidiag
 
 def test_svd():
     a = np.array([
@@ -10,7 +12,7 @@ def test_svd():
     ])
     a = a.T
     u, b, v = bidiag(a)
-    assert np.allclose(a, u @ b @ v.T)
+    assert_allclose(a, u @ b @ v.T, atol=1e-12)
     a = np.random.rand(100, 50)
     u, b, v = bidiag(a)
-    assert np.allclose(b, u.T @ a @ v)
+    assert_allclose(b, u.T @ a @ v, atol=1e-12)

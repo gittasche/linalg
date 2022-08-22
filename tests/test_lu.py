@@ -1,8 +1,8 @@
 import numpy as np
 import pytest
+from numpy.testing import assert_allclose
 
 from linalg.lu import lu_solve, lu
-from precision_cfg import assert_allclose_custom
 
 @pytest.mark.parametrize("a",
     [
@@ -22,7 +22,7 @@ from precision_cfg import assert_allclose_custom
 @pytest.mark.parametrize("piv_option", ["row", "col", "full"])
 def test_lu(a, piv_option):
     l, u, p, q = lu(a, piv_option=piv_option)
-    assert_allclose_custom(a, p @ l @ u @ q)
+    assert_allclose(a, p @ l @ u @ q, atol=1e-12)
 
 @pytest.mark.parametrize("a, b",
     [
@@ -53,4 +53,4 @@ def test_lu(a, piv_option):
 @pytest.mark.parametrize("piv_option", ["row", "col", "full"])
 def test_lu_solve(a, b, piv_option):
     x = lu_solve(a, b, piv_option=piv_option)
-    assert_allclose_custom(b, a @ x)
+    assert_allclose(b, a @ x, atol=1e-12)

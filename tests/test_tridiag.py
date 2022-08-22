@@ -1,4 +1,5 @@
 import numpy as np
+from numpy.testing import assert_allclose
 
 from linalg.solve_tridiag import solve_tridiag, solve_sympos_tridiag
 
@@ -16,7 +17,7 @@ def test_tridiag():
     c = np.array([2, 2, 2, 2, 2])
     d = np.array([0, 1, 2, 2, 3, 3])
     x = solve_tridiag((a, b, c), d)
-    assert np.allclose(d, a_check @ x)
+    assert_allclose(d, a_check @ x, atol=1e-12)
 
     a_check = np.array([
         [4, 2, 0, 0, 0, 0],
@@ -30,4 +31,4 @@ def test_tridiag():
     e = np.array([2, 2, 2, 2, 2])
     b = np.array([1, 2, 2, 3, 3, 3])
     x = solve_sympos_tridiag((d, e), b)
-    assert np.allclose(b, a_check @ x)
+    assert_allclose(b, a_check @ x, atol=1e-12)

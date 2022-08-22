@@ -1,10 +1,10 @@
 import numpy as np
 import pytest
+from numpy.testing import assert_allclose
 
 from linalg.elim import solve_elim
 from linalg.elim import inverse
 from linalg.elim import determinant
-from precision_cfg import assert_allclose_custom
 
 @pytest.mark.parametrize("a, b", 
     [
@@ -36,7 +36,7 @@ from precision_cfg import assert_allclose_custom
 @pytest.mark.parametrize("strategy", ["gauss", "gaussj"])
 def test_gauss_solve(a, b, piv_option, strategy):
     x = solve_elim(a, b, piv_option=piv_option, strategy=strategy)
-    assert_allclose_custom(b, a @ x)
+    assert_allclose(b, a @ x, atol=1e-12)
 
 def test_gauss_inv():
     a = np.array([
@@ -47,7 +47,7 @@ def test_gauss_inv():
     ])
     a_inv = inverse(a)
     identity = np.identity(a.shape[0])
-    assert_allclose_custom(identity, a @ a_inv)
+    assert_allclose(identity, a @ a_inv, atol=1e-12)
 
 def test_gauss_det():
     a = np.array([
@@ -57,4 +57,4 @@ def test_gauss_det():
         [2, 4, 6, 5]
     ])
     det = determinant(a)
-    assert np.allclose(det, 141.0)
+    assert_allclose(det, 141.0, atol=1e-12)
