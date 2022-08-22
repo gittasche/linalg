@@ -1,8 +1,8 @@
 import numpy as np
 import pytest
+from numpy.testing import assert_allclose
 
 from linalg.sym_decomp.ldlt import ldlt, sym_solve
-from precision_cfg import assert_allclose_custom
 
 @pytest.mark.parametrize("a",
     [
@@ -20,7 +20,7 @@ from precision_cfg import assert_allclose_custom
 )
 def test_ldlt(a):
     l, d, p = ldlt(a, piv_option="sym")
-    assert_allclose_custom(a, p @ l @ np.diag(d) @ l.T @ p.T)
+    assert_allclose(a, p @ l @ np.diag(d) @ l.T @ p.T, atol=1e-12)
 
 @pytest.mark.parametrize("a, b",
     [
@@ -52,4 +52,4 @@ def test_ldlt(a):
 )
 def test_ldlt_solve(a, b):
     x = sym_solve(a, b, piv_option="sym")
-    assert_allclose_custom(b, a @ x)
+    assert_allclose(b, a @ x, atol=1e-12)

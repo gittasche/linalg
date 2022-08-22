@@ -1,7 +1,7 @@
 import numpy as np
+from numpy.testing import assert_allclose
 
 from linalg.eig_unsym import house_hess
-from precision_cfg import assert_allclose_custom
 
 def test_eigunsym():
     a = np.array([
@@ -10,7 +10,7 @@ def test_eigunsym():
         [4, 3, 1]
     ])
     u, h = house_hess(a)
-    assert_allclose_custom(a, u @ h @ u.T)
+    assert_allclose(a, u @ h @ u.T, atol=1e-12)
     a = np.random.rand(50, 50)
     u, h = house_hess(a)
-    assert_allclose_custom(a, u @ h @ u.T)
+    assert_allclose(a, u @ h @ u.T, atol=1e-12)

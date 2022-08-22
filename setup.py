@@ -26,7 +26,7 @@ setup(
     description="Numerical linear algebra algorithms",
     author="gittasche",
     python_requires=">=3.9",
-    install_requires=["numpy>=1.22.3"],
+    install_requires=["numpy>=1.22.3", "Cython>=0.29.32"],
     packages=find_packages(),
     ext_modules=cythonize([house_ext, givens_ext]),
     zip_safe=False

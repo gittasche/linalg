@@ -1,7 +1,7 @@
 import numpy as np
+from numpy.testing import assert_allclose
 
 from linalg.sympos_decomp.cholesky import cholesky, sympos_solve
-from precision_cfg import assert_allclose_custom
 
 def test_cholesky():
     # check decomposition
@@ -11,7 +11,7 @@ def test_cholesky():
         [1, 2.75, 3.5]
     ])
     l = cholesky(a)
-    assert_allclose_custom(a, l @ l.T)
+    assert_allclose(a, l @ l.T, atol=1e-12)
 
     # test solve
     a = np.array([
@@ -22,4 +22,4 @@ def test_cholesky():
     ])
     b = np.array([7, 8, -4, 6])
     x = sympos_solve(a, b)
-    assert_allclose_custom(b, a @ x)
+    assert_allclose(b, a @ x, atol=1e-12)

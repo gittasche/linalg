@@ -1,9 +1,8 @@
 import numpy as np
 import pytest
+from numpy.testing import assert_allclose
 
 from linalg.qr_decomp import qr_house, qr_givens, qr_gram, qr_house_piv
-
-from precision_cfg import assert_allclose_custom
 
 @pytest.mark.parametrize("a",
     [
@@ -29,10 +28,10 @@ def test_qr(a, qr_func, mode):
     if "mode" in qr_func_args:
         if "decode_p" in qr_func_args:
             q, r, p = qr_func(a, mode=mode, decode_p=True)
-            assert_allclose_custom(a, q @ r @ p)
+            assert_allclose(a, q @ r @ p, atol=1e-12)
         else:
             q, r = qr_func(a, mode=mode)
-            assert_allclose_custom(a, q @ r)
+            assert_allclose(a, q @ r, atol=1e-12)
     else:
         q, r = qr_func(a)
-        assert_allclose_custom(a, q @ r)
+        assert_allclose(a, q @ r, atol=1e-12)

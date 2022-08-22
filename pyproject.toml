@@ -5,3 +5,7 @@ requires = [
     "Cython>=0.29.32",
     "numpy>=1.22.3"
 ]
+
+[tool.black]
+line-width = 100
+target_version = ['py39', 'py310']
