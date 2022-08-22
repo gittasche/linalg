@@ -14,6 +14,3 @@ def test_svd():
     a = np.random.rand(100, 50)
     u, b, v = bidiag(a)
     assert np.allclose(b, u.T @ a @ v)
-
-if __name__ == "__main__":
-    test_svd()

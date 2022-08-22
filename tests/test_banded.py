@@ -3,6 +3,8 @@ import numpy as np
 from linalg.lu.lu_band import lu_band, lu_band_solve
 from linalg.sym_decomp.ldlt_band import ldlt_band, sym_band_solve
 from linalg.sympos_decomp.cholesky_band import cholesky_band, sympos_band_solve
+from precision_cfg import assert_allclose_custom
+
 
 def test_banded():
     # test lu
@@ -15,12 +17,12 @@ def test_banded():
         [0, 0, 0, 0, 2, -1]
     ])
     l, u, p = lu_band(a, 1, 2)
-    assert np.allclose(a, p @ l @ u)
+    assert_allclose_custom(a, p @ l @ u)
 
     # test solve
     b = np.array([0, 1, 2, 2, 3, 3])
     x = lu_band_solve(a, 1, 2, b)
-    assert np.allclose(b, a @ x)
+    assert_allclose_custom(b, a @ x)
 
     # test cholesky
     a = np.array([
@@ -33,19 +35,16 @@ def test_banded():
     ])
 
     l = cholesky_band(a, d=2)
-    assert np.allclose(a, l @ l.T)
+    assert_allclose_custom(a, l @ l.T)
 
     # test solve
     b = np.array([1, 2, 2, 3, 3, 3])
     x = sympos_band_solve(a, 2, b)
-    assert np.allclose(b, a @ x)
+    assert_allclose_custom(b, a @ x)
 
     # test ldlt
     l, d = ldlt_band(a, d=2)
-    assert np.allclose(a, l @ np.diag(d) @ l.T)
+    assert_allclose_custom(a, l @ np.diag(d) @ l.T)
 
     x = sym_band_solve(a, 2, b)
-    assert np.allclose(b, a @ x)
-
-if __name__ == "__main__":
-    test_banded()
+    assert_allclose_custom(b, a @ x)
